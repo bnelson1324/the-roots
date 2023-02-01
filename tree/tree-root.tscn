@@ -1,19 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdacffm63ucbf"]
+[gd_scene load_steps=6 format=3 uid="uid://bdacffm63ucbf"]
 
 [ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="1_jj16g"]
+[ext_resource type="Script" path="res://tree/TreeRoot.cs" id="1_le6fw"]
+[ext_resource type="PackedScene" uid="uid://dnk1kar57ffxu" path="res://tree/tree-leaf.tscn" id="2_bvepa"]
 [ext_resource type="Texture2D" uid="uid://e7gb4jvtgskv" path="res://tree/ui/btn-add-branch.png" id="2_g8pna"]
+[ext_resource type="PackedScene" uid="uid://tfgvypucl1ac" path="res://tree/branch.tscn" id="3_wqb7k"]
 
 [node name="TreeRoot" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_le6fw")
+LeafScene = ExtResource("2_bvepa")
+BranchScene = ExtResource("3_wqb7k")
+metadata/_edit_group_ = true
 
 [node name="BtnRoot" type="TextureButton" parent="."]
 anchors_preset = -1
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 texture_normal = ExtResource("1_jj16g")
 
-[node name="BtnNewBranch" type="TextureButton" parent="."]
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="BtnNewBranch" type="TextureButton" parent="Buttons"]
 layout_direction = 1
+layout_mode = 1
 anchors_preset = -1
-offset_left = -12.0
-offset_top = -12.0
+offset_left = -16.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = 2.0
+tooltip_text = "Purchase new branch"
 texture_normal = ExtResource("2_g8pna")

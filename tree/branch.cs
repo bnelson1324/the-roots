@@ -11,14 +11,8 @@ public partial class Branch : Sprite2D
         _startScale = Scale;
     }
 
-    public bool BendToPosition(Vector2 newPosition, float mainBranchScale = 0.8f, float maxDistance = 250)
+    public bool BendToPosition(Vector2 newPosition, float mainBranchScale)
     {
-        // check if past max distance
-        if (Position.DistanceTo(newPosition) > maxDistance)
-        {
-            return false;
-        }
-
         // bend main branch
         Scale = new Vector2(_startScale.X * (GD.Randf() + mainBranchScale), _startScale.Y);
         Vector2 posDiff = newPosition - GlobalPosition;

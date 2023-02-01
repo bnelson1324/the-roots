@@ -3,8 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://dmcok88hgq1cs" path="res://tree/circle-leaf.png" id="1_0pgco"]
 
 [node name="TreeLeaf" type="Node2D"]
+metadata/_edit_group_ = true
 
 [node name="BtnLeaf" type="TextureButton" parent="."]
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 texture_normal = ExtResource("1_0pgco")

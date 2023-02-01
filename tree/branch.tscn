@@ -5,10 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://8mggcsbei58s" path="res://tree/branch2.png" id="2_rl56w"]
 
 [node name="Branch" type="Sprite2D"]
-scale = Vector2(2, 2)
+z_index = -1
 texture = ExtResource("1_mvvgq")
 offset = Vector2(8, 0)
 script = ExtResource("2_iocke")
+metadata/_edit_group_ = true
 
 [node name="Stem" type="Sprite2D" parent="."]
 position = Vector2(14, 0)
