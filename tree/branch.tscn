@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://tfgvypucl1ac"]
+
+[ext_resource type="Texture2D" uid="uid://3ev7tqdgxt4v" path="res://tree/branch1.png" id="1_mvvgq"]
+[ext_resource type="Script" path="res://tree/Branch.cs" id="2_iocke"]
+[ext_resource type="Texture2D" uid="uid://8mggcsbei58s" path="res://tree/branch2.png" id="2_rl56w"]
+
+[node name="Branch" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_mvvgq")
+offset = Vector2(8, 0)
+script = ExtResource("2_iocke")
+
+[node name="Stem" type="Sprite2D" parent="."]
+position = Vector2(14, 0)
+texture = ExtResource("2_rl56w")
+offset = Vector2(8, 0)

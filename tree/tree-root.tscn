@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdacffm63ucbf"]
+
+[ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="1_jj16g"]
+[ext_resource type="Texture2D" uid="uid://e7gb4jvtgskv" path="res://tree/ui/btn-add-branch.png" id="2_g8pna"]
+
+[node name="TreeRoot" type="Node2D"]
+
+[node name="BtnRoot" type="TextureButton" parent="."]
+anchors_preset = -1
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("1_jj16g")
+
+[node name="BtnNewBranch" type="TextureButton" parent="."]
+layout_direction = 1
+anchors_preset = -1
+offset_left = -12.0
+offset_top = -12.0
+texture_normal = ExtResource("2_g8pna")
