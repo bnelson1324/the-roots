@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdacffm63ucbf"]
+[gd_scene load_steps=7 format=3 uid="uid://bdacffm63ucbf"]
 
 [ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="1_jj16g"]
 [ext_resource type="Script" path="res://tree/TreeRoot.cs" id="1_le6fw"]
 [ext_resource type="PackedScene" uid="uid://dnk1kar57ffxu" path="res://tree/tree-leaf.tscn" id="2_bvepa"]
 [ext_resource type="Texture2D" uid="uid://e7gb4jvtgskv" path="res://tree/ui/btn-add-branch.png" id="2_g8pna"]
 [ext_resource type="PackedScene" uid="uid://tfgvypucl1ac" path="res://tree/branch.tscn" id="3_wqb7k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1b656"]
+size = Vector2(16, 16)
 
 [node name="TreeRoot" type="Node2D"]
 scale = Vector2(2, 2)
@@ -39,3 +42,8 @@ offset_right = -4.0
 offset_bottom = 2.0
 tooltip_text = "Purchase new branch"
 texture_normal = ExtResource("2_g8pna")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1b656")

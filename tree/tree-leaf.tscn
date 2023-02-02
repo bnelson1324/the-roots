@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnk1kar57ffxu"]
+[gd_scene load_steps=3 format=3 uid="uid://dnk1kar57ffxu"]
 
 [ext_resource type="Texture2D" uid="uid://dmcok88hgq1cs" path="res://tree/circle-leaf.png" id="1_0pgco"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1qjr"]
+size = Vector2(16, 16)
 
 [node name="TreeLeaf" type="Node2D"]
 metadata/_edit_group_ = true
@@ -11,3 +14,8 @@ offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
 texture_normal = ExtResource("1_0pgco")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_f1qjr")

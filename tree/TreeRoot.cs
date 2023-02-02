@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Data;
 using Godot;
 
 namespace roottowerdefense.tree;
@@ -28,25 +30,43 @@ public partial class TreeRoot : Node2D
         AddChild(leaf);
         AddChild(branch);
 
+        // set up collision detection on the leaf
+        HashSet<ulong> collidingObjects = new();
+        var area2D = leaf.GetNode<Area2D>("Area2D");
+        area2D.AreaEntered += other => { collidingObjects.Add(other.GetInstanceId()); };
+        area2D.AreaExited += other => { collidingObjects.Remove(other.GetInstanceId()); };
+
         // move leaf and branch to player's mouse position until placed
         Vector2 lastMousePos = Vector2.Zero;
         while (true)
         {
-            // randomize leaf position
+            // move leaf to mouse position if mouse has moved since last frame
             Vector2 mousePos = GetViewport().GetMousePosition();
-            if (
-                mousePos != lastMousePos // mouse moved since last frame
-                && GlobalPosition.DistanceTo(mousePos) < MaxLeafRadius) // leaf within max radius
+            if (mousePos != lastMousePos)
             {
                 leaf.GlobalPosition = mousePos;
                 branch.BendToPosition(leaf.GlobalPosition, 0.8f);
                 lastMousePos = mousePos;
             }
 
-            // if user clicked, place leaf down
-            if (Input.IsMouseButtonPressed(MouseButton.Left))
+            // if not colliding w/ anything and leaf is within max radius
+            if (
+                collidingObjects.Count == 0
+                && GlobalPosition.DistanceTo(mousePos) < MaxLeafRadius
+            )
             {
-                break;
+                // if user clicked, place leaf down
+                if (Input.IsMouseButtonPressed(MouseButton.Left))
+                {
+                    break;
+                }
+            }
+
+            // if user right clicked, exit
+            if (Input.IsMouseButtonPressed(MouseButton.Right))
+            {
+                branch.QueueFree();
+                leaf.QueueFree();
             }
 
             // wait for next frame
