@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using roottowerdefense.tree.ui;
 
 namespace roottowerdefense.tree;
 
@@ -19,15 +20,15 @@ public partial class TreeRoot : Node2D
         var btnRoot = GetNode<TextureButton>("BtnRoot");
         btnRoot.Pressed += () => { buttons.Visible = !buttons.Visible; };
 
-        var btnNewBranch = buttons.GetNode<TextureButton>("BtnNewBranch");
-        btnNewBranch.Pressed += CreateBranch;
+        var btnNewBranch = buttons.GetNode<PurchaseButton>("BtnNewBranch");
+        btnNewBranch.OnPurchased += CreateBranch;
 
         // sets up radius indicator
         _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");
         _radiusIndicator.Radius = MaxLeafRadius;
     }
 
-    private async void CreateBranch()
+    private async void CreateBranch(int cost)
     {
         _radiusIndicator.ShowRadius = true;
 
@@ -66,6 +67,7 @@ public partial class TreeRoot : Node2D
                 if (Input.IsMouseButtonPressed(MouseButton.Left))
                 {
                     _radiusIndicator.ShowRadius = false;
+                    Game.Instance.Matter -= cost;
                     break;
                 }
             }
