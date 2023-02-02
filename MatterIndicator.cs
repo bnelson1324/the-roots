@@ -1,6 +1,7 @@
-using Godot;
 using System;
-using roottowerdefense;
+using Godot;
+
+namespace roottowerdefense;
 
 public partial class MatterIndicator : Label
 {
@@ -21,6 +22,7 @@ public partial class MatterIndicator : Label
         {
             newText += $" (-{CurrentItemCost})";
         }
+
         Text = newText;
     }
 }
