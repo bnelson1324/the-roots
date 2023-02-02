@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db77gdobhbqgm"]
+
+[ext_resource type="Script" path="res://tree/RadiusIndicator.cs" id="1_06n51"]
+
+[node name="RadiusIndicator" type="Node2D"]
+script = ExtResource("1_06n51")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdacffm63ucbf"]
+[gd_scene load_steps=8 format=3 uid="uid://bdacffm63ucbf"]
 
 [ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="1_jj16g"]
 [ext_resource type="Script" path="res://tree/TreeRoot.cs" id="1_le6fw"]
 [ext_resource type="PackedScene" uid="uid://dnk1kar57ffxu" path="res://tree/tree-leaf.tscn" id="2_bvepa"]
 [ext_resource type="Texture2D" uid="uid://e7gb4jvtgskv" path="res://tree/ui/btn-add-branch.png" id="2_g8pna"]
 [ext_resource type="PackedScene" uid="uid://tfgvypucl1ac" path="res://tree/branch.tscn" id="3_wqb7k"]
+[ext_resource type="PackedScene" uid="uid://db77gdobhbqgm" path="res://tree/radius-indicator.tscn" id="6_0qytb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1b656"]
 size = Vector2(16, 16)
@@ -17,7 +18,6 @@ BranchScene = ExtResource("3_wqb7k")
 metadata/_edit_group_ = true
 
 [node name="BtnRoot" type="TextureButton" parent="."]
-anchors_preset = -1
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
@@ -47,3 +47,5 @@ texture_normal = ExtResource("2_g8pna")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_1b656")
+
+[node name="RadiusIndicator" parent="." instance=ExtResource("6_0qytb")]

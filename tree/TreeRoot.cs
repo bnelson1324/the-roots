@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Data;
 using Godot;
 
 namespace roottowerdefense.tree;
@@ -9,6 +8,8 @@ public partial class TreeRoot : Node2D
     [Export] public int MaxLeafRadius = 150;
     [Export] public PackedScene LeafScene;
     [Export] public PackedScene BranchScene;
+    
+    private RadiusIndicator _radiusIndicator;
 
     public override void _Ready()
     {
@@ -20,10 +21,16 @@ public partial class TreeRoot : Node2D
 
         var btnNewBranch = buttons.GetNode<TextureButton>("BtnNewBranch");
         btnNewBranch.Pressed += CreateBranch;
+
+        // sets up radius indicator
+        _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");
+        _radiusIndicator.Radius = MaxLeafRadius;
     }
 
     private async void CreateBranch()
     {
+        _radiusIndicator.ShowRadius = true;
+
         // spawn a leaf and a branch
         var leaf = LeafScene.Instantiate<Node2D>();
         var branch = BranchScene.Instantiate<Branch>();
@@ -58,6 +65,7 @@ public partial class TreeRoot : Node2D
                 // if user clicked, place leaf down
                 if (Input.IsMouseButtonPressed(MouseButton.Left))
                 {
+                    _radiusIndicator.ShowRadius = false;
                     break;
                 }
             }
@@ -65,6 +73,7 @@ public partial class TreeRoot : Node2D
             // if user right clicked, exit
             if (Input.IsMouseButtonPressed(MouseButton.Right))
             {
+                _radiusIndicator.ShowRadius = false;
                 branch.QueueFree();
                 leaf.QueueFree();
             }
