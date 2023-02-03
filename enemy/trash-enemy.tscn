@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://kqc5ia3h2pci"]
+
+[ext_resource type="Script" path="res://enemy/Enemy.cs" id="1_f367p"]
+[ext_resource type="Texture2D" uid="uid://djkq7hcrfgf3k" path="res://enemy/trash-enemy.png" id="2_jb67m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7w5b"]
+
+[node name="TrashEnemy" type="PathFollow2D"]
+script = ExtResource("1_f367p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jb67m")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f7w5b")

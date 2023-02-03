@@ -2,18 +2,25 @@ using Godot;
 
 namespace roottowerdefense.enemy;
 
-public partial class Enemy : Node2D
+public partial class Enemy : PathFollow2D
 {
+    
+    [Export] public int Health = 100;
+    [Export] private int _speed = 100;
 
-	[Export] public int Health = 100;
-	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public override void _Process(double delta)
+    {
+        if (Health <= 0)
+        {
+            QueueFree();
+        }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+        Progress += _speed * (float)delta;
+
+        // enemy reached the end of the path
+        if (ProgressRatio >= 1)
+        {
+            // todo: implement life loss
+        }
+    }
 }

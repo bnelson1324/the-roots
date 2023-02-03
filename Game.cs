@@ -1,19 +1,21 @@
 using Godot;
+using roottowerdefense.enemy;
 
 namespace roottowerdefense;
 
 public partial class Game : Node2D
 {
-    public static Game Instance
-    {
-        get;
-        private set;
-    }
-    
+    public static Game Instance { get; private set; }
+
+    public Path2D EnemyPath;
+
     [Signal]
     public delegate void UiUpdateEventHandler();
 
-    [Export] private int _matter; // player's currency
+    [Export] private int _startingMatter; // player's currency
+    [Export] private PackedScene _trashEnemy;
+
+    private int _matter;
 
     public int Matter
     {
@@ -27,9 +29,20 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        _matter = 0;
+        // matter
+        _matter = _startingMatter;
+
+        // enemies
+        var enemyTimer = GetNode<Timer>("EnemyTimer");
+        EnemyPath = GetNode<Path2D>("EnemyPath");
+        enemyTimer.Timeout += () =>
+        {
+            Enemy trashEnemy = _trashEnemy.Instantiate() as Enemy;
+            EnemyPath.AddChild(trashEnemy);
+        };
+
+        // misc
         Instance = this;
         EmitSignal(SignalName.UiUpdate);
     }
-    
 }
