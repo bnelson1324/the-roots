@@ -23,9 +23,11 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
+tooltip_text = "Open tree"
 texture_normal = ExtResource("1_jj16g")
 
 [node name="Buttons" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -8.0
