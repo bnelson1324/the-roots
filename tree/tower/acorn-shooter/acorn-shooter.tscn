@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://tree/tower/Tower.cs" id="1_gr7qr"]
 [ext_resource type="Texture2D" uid="uid://cdn7cpaqo8vnb" path="res://tree/tower/acorn-shooter/acorn-shooter-cannon.png" id="2_4qb5c"]
 
-[node name="Tower" type="Node2D"]
+[node name="AcornShooter" type="Timer"]
 script = ExtResource("1_gr7qr")
 
 [node name="Base" type="Sprite2D" parent="."]

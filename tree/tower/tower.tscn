@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1b8k66ixhkja"]
-
-[ext_resource type="Script" path="res://tree/tower/Tower.cs" id="1_upwse"]
-
-[node name="Tower" type="Node2D"]
-script = ExtResource("1_upwse")
-_range = 600
-
-[node name="AttackTimer" type="Timer" parent="."]

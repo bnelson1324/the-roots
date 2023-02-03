@@ -4,7 +4,7 @@ using roottowerdefense.enemy;
 
 namespace roottowerdefense.tree.tower;
 
-public partial class Tower : Node2D
+public partial class Tower : Timer
 {
     [Export] private PackedScene _projectile;
     [Export] private int _projectileDamage;
@@ -42,15 +42,28 @@ public partial class Tower : Node2D
         _canAttack = false;
 
         // await an enemy to come in range
-        // await ...
-
-        return; // temp
+        bool enemyFound = false;
         Enemy enemy = null;
-        Vector2 enemyDir = enemy.GlobalPosition - GlobalPosition;
+        while (!enemyFound)
+        {
+            foreach (var enemyNode in Game.Instance.EnemyPath.GetChildren())
+            {
+                enemy = enemyNode as Enemy;
+                if (_projectileOrigin.GlobalPosition.DistanceTo(enemy!.GlobalPosition) < _range)
+                {
+                    enemyFound = true;
+                    break;
+                }
+
+                await ToSignal(GetTree(), "process_frame");
+            }
+        }
+
+        // launch projectile
+        Vector2 enemyDir = enemy.GlobalPosition - _projectileOrigin.GlobalPosition;
         float enemyAngle = Mathf.Atan2(enemyDir.Y, enemyDir.X);
         _projectileOrigin.GlobalRotation = enemyAngle;
 
-        // launch projectile
         Projectile projectile = (Projectile)_projectile.Instantiate();
         projectile.GlobalRotation = enemyAngle;
         AddChild(projectile);
