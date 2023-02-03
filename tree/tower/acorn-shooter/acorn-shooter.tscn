@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://wmxgic12vho0"]
+
+[ext_resource type="Texture2D" uid="uid://clmo1bgaj3kbm" path="res://tree/tower/acorn-shooter/acorn-shooter-base.png" id="1_7x4ur"]
+[ext_resource type="Script" path="res://tree/tower/Tower.cs" id="1_gr7qr"]
+[ext_resource type="Texture2D" uid="uid://cdn7cpaqo8vnb" path="res://tree/tower/acorn-shooter/acorn-shooter-cannon.png" id="2_4qb5c"]
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_gr7qr")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_7x4ur")
+offset = Vector2(3, -7)
+
+[node name="ProjectileOrigin" type="Sprite2D" parent="."]
+position = Vector2(-1, -13)
+texture = ExtResource("2_4qb5c")
+offset = Vector2(4, 4)

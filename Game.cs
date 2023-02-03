@@ -27,6 +27,7 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
+        _matter = 0;
         Instance = this;
         EmitSignal(SignalName.UiUpdate);
     }
