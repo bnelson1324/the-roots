@@ -6,6 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7w5b"]
 
 [node name="TrashEnemy" type="PathFollow2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_f367p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
