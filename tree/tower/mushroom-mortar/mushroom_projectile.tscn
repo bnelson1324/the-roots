@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnl35emcsr4vc"]
+
+[ext_resource type="Script" path="res://tree/tower/Projectile.cs" id="1_dppyq"]
+[ext_resource type="Texture2D" uid="uid://dmnbhxt74eo7" path="res://tree/tower/mushroom-mortar/mushroom-projectile.png" id="2_t6am0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wj8n"]
+
+[node name="MushroomProjectile" type="Area2D"]
+script = ExtResource("1_dppyq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3wj8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_t6am0")

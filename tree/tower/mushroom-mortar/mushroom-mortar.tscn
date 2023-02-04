@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpvrxar3clbpd"]
+
+[ext_resource type="Script" path="res://tree/tower/Tower.cs" id="1_6tnwg"]
+[ext_resource type="PackedScene" uid="uid://dnl35emcsr4vc" path="res://tree/tower/mushroom-mortar/mushroom_projectile.tscn" id="2_l45td"]
+[ext_resource type="Texture2D" uid="uid://bh7dt4gkmyttu" path="res://tree/tower/mushroom-mortar/mushroom-mortar.png" id="3_jlhv6"]
+
+[node name="MushroomMortar" type="Node2D"]
+script = ExtResource("1_6tnwg")
+_projectile = ExtResource("2_l45td")
+_projectileDamage = 100
+_attackDelay = 4.0
+Range = 300
+_projectileVelocity = 500
+_projectileAoeRadius = 50.0
+
+[node name="Base" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_jlhv6")
+offset = Vector2(0, -7)
+
+[node name="ProjectileOrigin" type="Node2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(2, 2)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true

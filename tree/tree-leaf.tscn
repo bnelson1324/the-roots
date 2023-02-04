@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnk1kar57ffxu"]
+[gd_scene load_steps=12 format=3 uid="uid://dnk1kar57ffxu"]
 
 [ext_resource type="Texture2D" uid="uid://dmcok88hgq1cs" path="res://tree/circle-leaf.png" id="1_0pgco"]
 [ext_resource type="Script" path="res://tree/TreeLeaf.cs" id="1_ids60"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://wmxgic12vho0" path="res://tree/tower/acorn-shooter/acorn-shooter.tscn" id="2_st851"]
 [ext_resource type="PackedScene" uid="uid://dm6k12erci75c" path="res://tree/tower/cactus/cactus.tscn" id="3_mtvf7"]
 [ext_resource type="Script" path="res://tree/ui/PurchaseButton.cs" id="3_spqxy"]
+[ext_resource type="PackedScene" uid="uid://cpvrxar3clbpd" path="res://tree/tower/mushroom-mortar/mushroom-mortar.tscn" id="4_plmbf"]
 [ext_resource type="Texture2D" uid="uid://cpdqgsyl508wm" path="res://tree/ui/btn-buy-cactus.png" id="6_k3kg0"]
+[ext_resource type="Texture2D" uid="uid://b8wmtelcjn0ht" path="res://tree/ui/btn-buy-mushroom-mortar.png" id="8_a3o2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1qjr"]
 size = Vector2(16, 16)
@@ -16,6 +18,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_ids60")
 AcornShooter = ExtResource("2_st851")
 Cactus = ExtResource("3_mtvf7")
+MushroomMortar = ExtResource("4_plmbf")
 metadata/_edit_group_ = true
 
 [node name="BtnLeaf" type="TextureButton" parent="."]
@@ -53,13 +56,26 @@ layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
 offset_left = 2.0
-offset_top = -16.0
+offset_top = -20.0
 offset_right = 14.0
-offset_bottom = -4.0
+offset_bottom = -8.0
 tooltip_text = "Cactus"
 texture_normal = ExtResource("6_k3kg0")
 script = ExtResource("3_spqxy")
 Cost = 200
+
+[node name="BtnMushroomMortar" type="TextureButton" parent="Buttons"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = -10.0
+offset_right = 32.0
+offset_bottom = 2.0
+tooltip_text = "Mushroom Mortar"
+texture_normal = ExtResource("8_a3o2l")
+script = ExtResource("3_spqxy")
+Cost = 300
 
 [node name="Area2D" type="Area2D" parent="."]
 

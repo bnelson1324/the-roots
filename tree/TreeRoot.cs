@@ -35,7 +35,7 @@ public partial class TreeRoot : Node2D
         _radiusIndicator.ShowRadius = true;
 
         // spawn a leaf and a branch
-        var leaf = LeafScene.Instantiate<Node2D>();
+        var leaf = LeafScene.Instantiate<TreeLeaf>();
         var branch = BranchScene.Instantiate<Branch>();
         AddChild(leaf);
         AddChild(branch);
@@ -71,6 +71,7 @@ public partial class TreeRoot : Node2D
                     _radiusIndicator.ShowRadius = false;
                     Game.Instance.Matter -= cost;
                     _buttons.Visible = false;
+                    leaf.IsPlaced = true;
                     break;
                 }
             }

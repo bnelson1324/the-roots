@@ -8,7 +8,10 @@ public partial class TreeLeaf : Node2D
 {
     [Export] public PackedScene AcornShooter;
     [Export] public PackedScene Cactus;
+    [Export] public PackedScene MushroomMortar;
 
+    public bool IsPlaced = false;
+    
     private RadiusIndicator _radiusIndicator;
 
     private bool _towerPurchased;
@@ -24,7 +27,7 @@ public partial class TreeLeaf : Node2D
         _btnLeaf = GetNode<TextureButton>("BtnLeaf");
         _btnLeaf.Pressed += () =>
         {
-            if (!_towerPurchased)
+            if (IsPlaced && !_towerPurchased)
             {
                 _buttons.Visible = !_buttons.Visible;
             }
@@ -35,6 +38,9 @@ public partial class TreeLeaf : Node2D
 
         var btnCactus = _buttons.GetNode<PurchaseButton>("BtnCactus");
         btnCactus.OnPurchased += (int cost) => { BecomeTower(Cactus, cost); };
+
+        var btnMushroomMortar = _buttons.GetNode<PurchaseButton>("BtnMushroomMortar");
+        btnMushroomMortar.OnPurchased += (int cost) => { BecomeTower(MushroomMortar, cost); };
 
         // sets up radius indicator
         _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");

@@ -30,7 +30,10 @@ public partial class WaveManager : Node
         _wavesList = new[]
         {
             new Wave(new WavePack(_trashEnemy, 2)),
-            new Wave(new WavePack(_trashEnemy, 4))
+            new Wave(new WavePack(_trashEnemy, 4)),
+            new Wave(new WavePack(_trashEnemy, 8)),
+            new Wave(new WavePack(_trashEnemy, 10)),
+            new Wave(new WavePack(_trashEnemy, 12)),
         };
     }
 
