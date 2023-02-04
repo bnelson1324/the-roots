@@ -8,11 +8,13 @@ namespace roottowerdefense.tree;
 public partial class TreeRoot : Node2D
 {
     [Export] public int MaxLeafRadius = 150;
+    [Export] private int _perBranchPriceIncrease = 80;
     [Export] public PackedScene LeafScene;
     [Export] public PackedScene BranchScene;
 
     private RadiusIndicator _radiusIndicator;
     private Control _buttons;
+    private PurchaseButton _btnNewBranch;
 
     public override void _Ready()
     {
@@ -22,8 +24,8 @@ public partial class TreeRoot : Node2D
         var btnRoot = GetNode<TextureButton>("BtnRoot");
         btnRoot.Pressed += () => { _buttons.Visible = !_buttons.Visible; };
 
-        var btnNewBranch = _buttons.GetNode<PurchaseButton>("BtnNewBranch");
-        btnNewBranch.OnPurchased += CreateBranch;
+        _btnNewBranch = _buttons.GetNode<PurchaseButton>("BtnNewBranch");
+        _btnNewBranch.OnPurchased += CreateBranch;
 
         // sets up radius indicator
         _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");
@@ -72,6 +74,7 @@ public partial class TreeRoot : Node2D
                     Game.Instance.Matter -= cost;
                     _buttons.Visible = false;
                     leaf.IsPlaced = true;
+                    _btnNewBranch.Cost += _perBranchPriceIncrease;
                     break;
                 }
             }

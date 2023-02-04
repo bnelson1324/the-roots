@@ -16,13 +16,12 @@ public partial class Projectile : Area2D
         AreaEntered += (other) =>
         {
             var otherParent = other.GetParent();
-            if (otherParent is Enemy enemy && !_hitEnemy )
+            if (otherParent is Enemy enemy && !_hitEnemy)
             {
                 _hitEnemy = true;
                 if (_aoeRadius == 0)
                 {
                     enemy.Health -= _damage;
-                   
                 }
                 else
                 {
