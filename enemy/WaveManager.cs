@@ -7,7 +7,7 @@ namespace roottowerdefense.enemy;
 public partial class WaveManager : Node
 {
     private float _timeBetweenEnemies = 4;
-    private float _timeBetweenWaves = 8;
+    private float _timeBetweenWaves = 5;
     [Export] private PackedScene _trashEnemy;
 
     private Timer _enemyTimer;

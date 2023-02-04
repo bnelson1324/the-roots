@@ -24,8 +24,9 @@ public partial class Tower : Node2D
     {
         _projectileOrigin = GetNode<Node2D>("ProjectileOrigin");
 
-        // set delay
+        // set up timer
         _attackTimer = GetNode<Timer>("AttackTimer");
+        _attackTimer.WaitTime = _attackDelay;
         _attackTimer.Timeout += () => { _canAttack = true; };
     }
 

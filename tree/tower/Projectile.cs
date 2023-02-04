@@ -18,10 +18,11 @@ public partial class Projectile : Area2D
             var otherParent = other.GetParent();
             if (otherParent is Enemy enemy && !_hitEnemy )
             {
+                _hitEnemy = true;
                 if (_aoeRadius == 0)
                 {
                     enemy.Health -= _damage;
-                    _hitEnemy = true;
+                   
                 }
                 else
                 {
@@ -33,8 +34,6 @@ public partial class Projectile : Area2D
                             aoeEnemy.Health -= _damage;
                         }
                     }
-
-                    _hitEnemy = true;
                 }
 
                 QueueFree();
