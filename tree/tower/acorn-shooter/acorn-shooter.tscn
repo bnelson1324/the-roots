@@ -9,7 +9,7 @@
 script = ExtResource("1_gr7qr")
 _projectile = ExtResource("2_hnewa")
 _projectileDamage = 40
-Range = 400
+Range = 600
 _projectileVelocity = 300
 
 [node name="Base" type="Sprite2D" parent="."]
