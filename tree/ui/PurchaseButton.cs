@@ -25,6 +25,11 @@ public partial class PurchaseButton : TextureButton
         MouseExited += () => { UpdateMatterIndicator(0); };
     }
 
+    public override void _ExitTree()
+    {
+        UpdateMatterIndicator(0);
+    }
+
     private void UpdateMatterIndicator(int currentItemCost)
     {
         var matterIndicator = Game.Instance?.GetNode<MatterIndicator>("MatterIndicator");

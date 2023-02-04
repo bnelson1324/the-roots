@@ -54,9 +54,8 @@ public partial class Tower : Node2D
                     enemyFound = true;
                     break;
                 }
-
-                await ToSignal(GetTree(), "process_frame");
             }
+            await ToSignal(GetTree(), "process_frame");
         }
 
         // launch projectile
@@ -65,8 +64,7 @@ public partial class Tower : Node2D
         _projectileOrigin.GlobalRotation = enemyAngle;
 
         Projectile projectile = (Projectile)_projectile.Instantiate();
-        projectile.GlobalRotation = enemyAngle;
-        AddChild(projectile);
+        _projectileOrigin.AddChild(projectile);
         projectile.Launch(_projectileDamage, _projectileVelocity, _projectileAoeRadius);
 
         _attackTimer.Start();

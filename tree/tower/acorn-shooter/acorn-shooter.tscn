@@ -11,14 +11,17 @@ _projectile = ExtResource("2_hnewa")
 _projectileDamage = 30
 
 [node name="Base" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("1_7x4ur")
 offset = Vector2(3, -7)
 
 [node name="ProjectileOrigin" type="Sprite2D" parent="."]
-position = Vector2(-1, -13)
+position = Vector2(-2, -26)
+scale = Vector2(2, 2)
 texture = ExtResource("2_4qb5c")
 offset = Vector2(4, 4)
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+autostart = true
