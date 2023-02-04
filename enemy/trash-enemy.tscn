@@ -7,6 +7,8 @@
 
 [node name="TrashEnemy" type="PathFollow2D"]
 scale = Vector2(2, 2)
+rotates = false
+loop = false
 script = ExtResource("1_f367p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +18,10 @@ texture = ExtResource("2_jb67m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_f7w5b")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = -24.0
+show_percentage = false

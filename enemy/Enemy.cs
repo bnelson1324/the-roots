@@ -4,11 +4,9 @@ namespace roottowerdefense.enemy;
 
 public partial class Enemy : PathFollow2D
 {
-    [Signal]
-    public delegate void OnHealthChangeEventHandler();
-
-
     [Export] private int _health = 100;
+
+    private ProgressBar _healthBar;
 
     public int Health
     {
@@ -16,8 +14,7 @@ public partial class Enemy : PathFollow2D
         set
         {
             _health = value;
-            EmitSignal(SignalName.OnHealthChange);
-
+            _healthBar.Value = _health;
             if (Health <= 0)
             {
                 QueueFree();
@@ -26,6 +23,13 @@ public partial class Enemy : PathFollow2D
     }
 
     [Export] private int _speed = 100;
+
+    public override void _Ready()
+    {
+        _healthBar = GetNode<ProgressBar>("HealthBar");
+        _healthBar.MaxValue = Health;
+        _healthBar.Value = Health;
+    }
 
     public override void _Process(double delta)
     {

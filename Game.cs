@@ -8,8 +8,6 @@ public partial class Game : Node2D
 {
     public static Game Instance { get; private set; }
 
-    public Path2D EnemyPath;
-
     [Signal]
     public delegate void UiUpdateEventHandler();
 
@@ -20,6 +18,7 @@ public partial class Game : Node2D
     [Export] private int _startingMatter; // player's currency
     [Export] private PackedScene _trashEnemy;
 
+    public Path2D EnemyPath;
 
     private int _matter;
 
@@ -53,6 +52,7 @@ public partial class Game : Node2D
     }
 
     private Timer _enemyTimer;
+    private Control _pauseScreen;
 
     public override void _Ready()
     {
@@ -69,7 +69,19 @@ public partial class Game : Node2D
         };
         _enemyTimer.Start();
 
+        // pause screen
+        _pauseScreen = GetNode<Control>("PauseScreen");
+        _pauseScreen.GetNode<Button>("BtnRestart").Pressed += () => { GetTree().ReloadCurrentScene(); };
+
         // misc
         Instance = this;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustPressed("Pause"))
+        {
+            _pauseScreen.Visible = !_pauseScreen.Visible;
+        }
     }
 }

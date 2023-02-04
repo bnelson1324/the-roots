@@ -42,6 +42,21 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "Lives:"
 
+[node name="PauseScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnRestart" type="Button" parent="PauseScreen"]
+layout_mode = 0
+offset_left = 524.0
+offset_top = 29.0
+offset_right = 589.0
+offset_bottom = 60.0
+text = "Restart Game"
+
 [node name="Trees" type="Node" parent="."]
 
 [node name="TreeRoot" parent="Trees" instance=ExtResource("3_h4ni3")]
