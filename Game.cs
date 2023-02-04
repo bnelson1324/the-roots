@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using roottowerdefense.enemy;
 
@@ -12,8 +13,13 @@ public partial class Game : Node2D
     [Signal]
     public delegate void UiUpdateEventHandler();
 
+    [Signal]
+    public delegate void GameLossEventHandler();
+
+    [Export] private int _startingLives = 3;
     [Export] private int _startingMatter; // player's currency
     [Export] private PackedScene _trashEnemy;
+
 
     private int _matter;
 
@@ -27,22 +33,43 @@ public partial class Game : Node2D
         }
     }
 
+    private int _lives;
+
+    public int Lives
+    {
+        get => _lives;
+        set
+        {
+            _lives = value;
+            GetNode<Label>("LivesIndicator").Text = $"Lives: {Math.Max(_lives, 0)}";
+            if (_lives <= 0)
+            {
+                _enemyTimer.Stop();
+                EmitSignal(SignalName.GameLoss);
+            }
+
+            EmitSignal(SignalName.UiUpdate);
+        }
+    }
+
+    private Timer _enemyTimer;
+
     public override void _Ready()
     {
-        // matter
-        _matter = _startingMatter;
+        Lives = _startingLives;
+        Matter = _startingMatter;
 
         // enemies
-        var enemyTimer = GetNode<Timer>("EnemyTimer");
+        _enemyTimer = GetNode<Timer>("EnemyTimer");
         EnemyPath = GetNode<Path2D>("EnemyPath");
-        enemyTimer.Timeout += () =>
+        _enemyTimer.Timeout += () =>
         {
             Enemy trashEnemy = _trashEnemy.Instantiate() as Enemy;
             EnemyPath.AddChild(trashEnemy);
         };
+        _enemyTimer.Start();
 
         // misc
         Instance = this;
-        EmitSignal(SignalName.UiUpdate);
     }
 }

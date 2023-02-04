@@ -30,6 +30,18 @@ offset_right = 206.0
 offset_bottom = 88.0
 metadata/_edit_lock_ = true
 
+[node name="LivesIndicator" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 568.0
+offset_right = 159.0
+offset_bottom = 638.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Lives:"
+
 [node name="Trees" type="Node" parent="."]
 
 [node name="TreeRoot" parent="Trees" instance=ExtResource("3_h4ni3")]
@@ -46,4 +58,3 @@ curve = SubResource("Curve2D_bqb2c")
 
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 6.0
-autostart = true

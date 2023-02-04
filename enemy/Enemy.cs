@@ -4,23 +4,39 @@ namespace roottowerdefense.enemy;
 
 public partial class Enemy : PathFollow2D
 {
-    
-    [Export] public int Health = 100;
+    [Signal]
+    public delegate void OnHealthChangeEventHandler();
+
+
+    [Export] private int _health = 100;
+
+    public int Health
+    {
+        get => _health;
+        set
+        {
+            _health = value;
+            EmitSignal(SignalName.OnHealthChange);
+
+            if (Health <= 0)
+            {
+                QueueFree();
+            }
+        }
+    }
+
     [Export] private int _speed = 100;
 
     public override void _Process(double delta)
     {
-        if (Health <= 0)
-        {
-            QueueFree();
-        }
-
         Progress += _speed * (float)delta;
 
         // enemy reached the end of the path
-        if (ProgressRatio >= 1)
+        if (GlobalPosition.Y < 0)
         {
-            // todo: implement life loss
+            Game.Instance.Lives--;
+            GD.Print("end reached");
+            QueueFree();
         }
     }
 }
