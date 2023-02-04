@@ -44,6 +44,7 @@ public partial class Game : Node2D
             if (_lives <= 0)
             {
                 EmitSignal(SignalName.GameLoss);
+                GetNode<Label>("LoseText").Visible = true;
             }
 
             EmitSignal(SignalName.UiUpdate);
