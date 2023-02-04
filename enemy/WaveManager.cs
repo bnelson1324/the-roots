@@ -6,18 +6,22 @@ namespace roottowerdefense.enemy;
 
 public partial class WaveManager : Node
 {
-    private float _timeBetweenEnemies = 4;
-    private float _timeBetweenWaves = 5;
     [Export] private PackedScene _trashEnemy;
+    [Export] private PackedScene _sodaEnemy;
 
     private Timer _enemyTimer;
     private Path2D _enemyPath;
 
+    // progress
     private int _waveIndex;
     private int _wavePackIndex;
     private int _wavePackEnemiesSpawned;
     private WaveEvent[] _wavesList;
 
+    // difficulty
+    private float _timeBetweenEnemies = 4;
+    private float _timeBetweenWaves = 5;
+    
     // wave indicator
     private int _currentWaveIndicatorNum = 1;
     private int _totalWaves;
@@ -31,19 +35,44 @@ public partial class WaveManager : Node
         GetParent<Game>().GameLoss += () => { _enemyTimer.Stop(); };
         _enemyTimer.Start();
 
-        // define wavelist
+        // DEFINE WAVESLIST
         _wavesList = new WaveEvent[]
         {
+            // 1-5
             new Wave(new WavePack(_trashEnemy, 2)),
-            new Wave(new WavePack(_trashEnemy, 4)),
+            new Wave(new WavePack(_trashEnemy, 4), new WavePack(_sodaEnemy, 1)),
             new WaveLambda(() => { _timeBetweenEnemies = 3; }),
             new Wave(new WavePack(_trashEnemy, 8)),
             new WaveLambda(() => { _timeBetweenEnemies = 2.5f; }),
-            new Wave(new WavePack(_trashEnemy, 10)),
+            new Wave(new WavePack(_trashEnemy, 8), new WavePack(_sodaEnemy, 3)),
             new WaveLambda(() => { _timeBetweenEnemies = 1; }),
-            new Wave(new WavePack(_trashEnemy, 12)),
+            new Wave(new WavePack(_trashEnemy, 8), new WavePack(_sodaEnemy, 4)),
+
+            // 6-10
+            new Wave(new WavePack(_sodaEnemy, 6)),
+            new WaveLambda(() => { _timeBetweenEnemies = 0.6f; }),
+            new Wave(new WavePack(_sodaEnemy, 8)),
+            new Wave(
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 1),
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 1),
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 1)
+            ),
             new WaveLambda(() => { _timeBetweenEnemies = 0.2f; }),
-            new Wave(new WavePack(_trashEnemy, 12)),
+            new Wave(
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 1),
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 1)
+            ),
+            new Wave(
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2),
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2),
+                new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2)
+            ),
+            
+            // 10-15
+            new Wave( new WavePack(_sodaEnemy, 8)),
+            new WaveLambda(() => { _timeBetweenEnemies = 0.1f; }),
+            new Wave(new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 6)),
+            new Wave(new WavePack(_sodaEnemy, 8)),
         };
 
         // calc totalWaves
@@ -52,12 +81,12 @@ public partial class WaveManager : Node
             if (waveEvent is Wave)
                 _totalWaves++;
         }
+
         UpdateWaveIndicator();
     }
 
     private async void NextWaveEvent()
     {
-        
         // check if player beat all the waves
         if (_waveIndex >= _wavesList.Length)
         {
@@ -78,7 +107,7 @@ public partial class WaveManager : Node
 
         // update wave indicator
         UpdateWaveIndicator();
-        
+
         // spawn next enemy
         WaveEvent currentEvent = _wavesList[_waveIndex];
         if (currentEvent is Wave currentWave)

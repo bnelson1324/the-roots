@@ -16,7 +16,6 @@ public partial class Game : Node2D
 
     [Export] private int _startingLives = 3;
     [Export] private int _startingMatter; // player's currency
-    [Export] private PackedScene _trashEnemy;
 
     public Path2D EnemyPath;
 

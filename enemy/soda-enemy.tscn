@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceu7h2kdhxx2u"]
+
+[ext_resource type="Script" path="res://enemy/Enemy.cs" id="1_iclg6"]
+[ext_resource type="Texture2D" uid="uid://32mtkobdtr6p" path="res://enemy/soda-enemy.png" id="2_an2fv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f7w5b"]
+
+[node name="SodaEnemy" type="PathFollow2D"]
+scale = Vector2(2, 2)
+rotates = false
+loop = false
+script = ExtResource("1_iclg6")
+_health = 150
+_money = 40
+_speed = 130
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_an2fv")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f7w5b")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = -24.0
+show_percentage = false

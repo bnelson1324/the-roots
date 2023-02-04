@@ -56,18 +56,26 @@ public partial class Tower : Node2D
                     break;
                 }
             }
+
             await ToSignal(GetTree(), "process_frame");
         }
 
         // launch projectile
-        Vector2 enemyDir = enemy.GlobalPosition - _projectileOrigin.GlobalPosition;
-        float enemyAngle = Mathf.Atan2(enemyDir.Y, enemyDir.X);
-        _projectileOrigin.GlobalRotation = enemyAngle;
+        if (IsInstanceValid(enemy))
+        {
+            Vector2 enemyDir = enemy.GlobalPosition - _projectileOrigin.GlobalPosition;
+            float enemyAngle = Mathf.Atan2(enemyDir.Y, enemyDir.X);
+            _projectileOrigin.GlobalRotation = enemyAngle;
 
-        Projectile projectile = (Projectile)_projectile.Instantiate();
-        _projectileOrigin.AddChild(projectile);
-        projectile.Launch(_projectileDamage, _projectileVelocity, _projectileAoeRadius);
+            Projectile projectile = (Projectile)_projectile.Instantiate();
+            _projectileOrigin.AddChild(projectile);
+            projectile.Launch(_projectileDamage, _projectileVelocity, _projectileAoeRadius);
 
-        _attackTimer.Start();
+            _attackTimer.Start();
+        }
+        else
+        {
+            _attackTimer.Start(0);
+        }
     }
 }

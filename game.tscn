@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=9 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://kqc5ia3h2pci" path="res://enemy/trash-enemy.tscn" id="2_7228y"]
 [ext_resource type="PackedScene" uid="uid://bdacffm63ucbf" path="res://tree/tree-root.tscn" id="3_h4ni3"]
 [ext_resource type="Script" path="res://enemy/WaveManager.cs" id="6_g0j1l"]
+[ext_resource type="PackedScene" uid="uid://ceu7h2kdhxx2u" path="res://enemy/soda-enemy.tscn" id="7_khu64"]
 
 [sub_resource type="Curve2D" id="Curve2D_bqb2c"]
 _data = {
@@ -16,7 +17,6 @@ point_count = 14
 [node name="Game" type="Node2D"]
 script = ExtResource("1_12olu")
 _startingMatter = 300
-_trashEnemy = ExtResource("2_7228y")
 
 [node name="Map" type="Sprite2D" parent="."]
 z_index = -4096
@@ -87,6 +87,7 @@ curve = SubResource("Curve2D_bqb2c")
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("6_g0j1l")
 _trashEnemy = ExtResource("2_7228y")
+_sodaEnemy = ExtResource("7_khu64")
 
 [node name="EnemyTimer" type="Timer" parent="WaveManager"]
 wait_time = 8.0
