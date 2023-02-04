@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://wmxgic12vho0"]
+[gd_scene load_steps=5 format=3 uid="uid://wmxgic12vho0"]
 
 [ext_resource type="Texture2D" uid="uid://clmo1bgaj3kbm" path="res://tree/tower/acorn-shooter/acorn-shooter-base.png" id="1_7x4ur"]
 [ext_resource type="Script" path="res://tree/tower/Tower.cs" id="1_gr7qr"]
 [ext_resource type="Texture2D" uid="uid://cdn7cpaqo8vnb" path="res://tree/tower/acorn-shooter/acorn-shooter-cannon.png" id="2_4qb5c"]
+[ext_resource type="PackedScene" uid="uid://b81hmy37fueyj" path="res://tree/tower/acorn-shooter/acorn-projectile.tscn" id="2_hnewa"]
 
-[node name="AcornShooter" type="Timer"]
+[node name="AcornShooter" type="Node2D"]
 script = ExtResource("1_gr7qr")
+_projectile = ExtResource("2_hnewa")
+_projectileDamage = 30
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("1_7x4ur")
@@ -15,3 +18,7 @@ offset = Vector2(3, -7)
 position = Vector2(-1, -13)
 texture = ExtResource("2_4qb5c")
 offset = Vector2(4, 4)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

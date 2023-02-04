@@ -4,7 +4,7 @@ using roottowerdefense.enemy;
 
 namespace roottowerdefense.tree.tower;
 
-public partial class Tower : Timer
+public partial class Tower : Node2D
 {
     [Export] private PackedScene _projectile;
     [Export] private int _projectileDamage;
