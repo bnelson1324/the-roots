@@ -9,8 +9,8 @@ public partial class Tower : Node2D
     [Export] private PackedScene _projectile;
     [Export] private int _projectileDamage;
     [Export] private float _attackDelay = 2;
-    [Export] private int _range = 500;
-    [Export] private int _projectileVelocity = 300;
+    [Export] public int Range;
+    [Export] private int _projectileVelocity;
     [Export] private float _projectileAoeRadius = 0;
 
     private Timer _attackTimer;
@@ -49,7 +49,7 @@ public partial class Tower : Node2D
             foreach (var enemyNode in Game.Instance.EnemyPath.GetChildren())
             {
                 enemy = enemyNode as Enemy;
-                if (_projectileOrigin.GlobalPosition.DistanceTo(enemy!.GlobalPosition) < _range)
+                if (_projectileOrigin.GlobalPosition.DistanceTo(enemy!.GlobalPosition) < Range)
                 {
                     enemyFound = true;
                     break;
