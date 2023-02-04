@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -5,8 +6,8 @@ namespace roottowerdefense.enemy;
 
 public partial class WaveManager : Node
 {
-    [Export] private int _timeBetweenEnemies = 4;
-    [Export] private int _timeBetweenWaves = 8;
+    private int _timeBetweenEnemies = 4;
+    private int _timeBetweenWaves = 8;
     [Export] private PackedScene _trashEnemy;
 
     private Timer _enemyTimer;
@@ -15,29 +16,31 @@ public partial class WaveManager : Node
     private int _waveIndex;
     private int _wavePackIndex;
     private int _wavePackEnemiesSpawned;
-    private Wave[] _wavesList;
+    private WaveEvent[] _wavesList;
 
     public override void _Ready()
     {
         // set up timer
         _enemyTimer = GetNode<Timer>("EnemyTimer");
         _enemyPath = GetNode<Path2D>("../EnemyPath");
-        _enemyTimer.Timeout += NextEnemy;
+        _enemyTimer.Timeout += NextWaveEvent;
         GetParent<Game>().GameLoss += () => { _enemyTimer.Stop(); };
         _enemyTimer.Start();
 
         // define wavelist
-        _wavesList = new[]
+        _wavesList = new WaveEvent[]
         {
             new Wave(new WavePack(_trashEnemy, 2)),
             new Wave(new WavePack(_trashEnemy, 4)),
+            new WaveLambda(() => { _timeBetweenEnemies = 3; }),
             new Wave(new WavePack(_trashEnemy, 8)),
             new Wave(new WavePack(_trashEnemy, 10)),
+            new WaveLambda(() => { _timeBetweenEnemies = 1; }),
             new Wave(new WavePack(_trashEnemy, 12)),
         };
     }
 
-    private async void NextEnemy()
+    private async void NextWaveEvent()
     {
         // check if player beat all the waves
         if (_waveIndex >= _wavesList.Length)
@@ -58,35 +61,52 @@ public partial class WaveManager : Node
         }
 
         // spawn next enemy
-        Wave currentWave = _wavesList[_waveIndex];
-        WavePack currentPack = currentWave.WavePacks[_wavePackIndex];
-        Enemy nextEnemy = currentPack.EnemyType.Instantiate() as Enemy;
-        _enemyPath.AddChild(nextEnemy);
-
-        // advance progress
-        _wavePackEnemiesSpawned++;
-        if (_wavePackEnemiesSpawned >= currentPack.Quantity)
+        WaveEvent currentEvent = _wavesList[_waveIndex];
+        if (currentEvent is Wave currentWave)
         {
-            // next wavepack
-            _wavePackEnemiesSpawned = 0;
-            _wavePackIndex++;
+            WavePack currentPack = currentWave.WavePacks[_wavePackIndex];
+            Enemy nextEnemy = currentPack.EnemyType.Instantiate() as Enemy;
+            _enemyPath.AddChild(nextEnemy);
+
+            // advance progress
+            _wavePackEnemiesSpawned++;
+            if (_wavePackEnemiesSpawned >= currentPack.Quantity)
+            {
+                // next wavepack
+                _wavePackEnemiesSpawned = 0;
+                _wavePackIndex++;
+            }
+
+            if (_wavePackIndex >= currentWave.WavePacks.Length)
+            {
+                // next waveevent
+                _wavePackIndex = 0;
+                _waveIndex++;
+                _enemyTimer.Start(_timeBetweenWaves);
+            }
+            else
+            {
+                // next enemy
+                _enemyTimer.Start(_timeBetweenEnemies);
+            }
         }
-
-        if (_wavePackIndex >= currentWave.WavePacks.Length)
+        else if (currentEvent is WaveLambda currentLambda)
         {
-            // next wave
-            _wavePackIndex = 0;
             _waveIndex++;
-            _enemyTimer.Start(_timeBetweenWaves);
-        }
-        else
-        {
-            // spawn enemy
-            _enemyTimer.Start(_timeBetweenEnemies);
+            currentLambda.Lambda.Invoke();
+            _enemyTimer.Start(0);
         }
     }
 }
 
-record struct Wave(params WavePack[] WavePacks);
+abstract record WaveEvent();
 
-record struct WavePack(PackedScene EnemyType, int Quantity);
+// waves
+record Wave(params WavePack[] WavePacks) : WaveEvent;
+
+record WavePack(PackedScene EnemyType, int Quantity);
+
+// wave lambdas
+record WaveLambda(WaveLambdaDelegate Lambda) : WaveEvent;
+
+delegate void WaveLambdaDelegate();
