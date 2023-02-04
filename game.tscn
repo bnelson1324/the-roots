@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=8 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
 [ext_resource type="Texture2D" uid="uid://dtvxbueoxrnha" path="res://map.png" id="2_7031m"]
 [ext_resource type="PackedScene" uid="uid://kqc5ia3h2pci" path="res://enemy/trash-enemy.tscn" id="2_7228y"]
 [ext_resource type="PackedScene" uid="uid://bdacffm63ucbf" path="res://tree/tree-root.tscn" id="3_h4ni3"]
+[ext_resource type="Script" path="res://enemy/WaveManager.cs" id="6_g0j1l"]
 
 [sub_resource type="Curve2D" id="Curve2D_bqb2c"]
 _data = {
@@ -71,5 +72,26 @@ position = Vector2(945, 453)
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_bqb2c")
 
-[node name="EnemyTimer" type="Timer" parent="."]
-wait_time = 6.0
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("6_g0j1l")
+_trashEnemy = ExtResource("2_7228y")
+
+[node name="EnemyTimer" type="Timer" parent="WaveManager"]
+wait_time = 8.0
+one_shot = true
+
+[node name="WinText" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 438.0
+offset_top = 93.0
+offset_right = 702.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "You win!"

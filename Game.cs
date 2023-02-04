@@ -43,7 +43,6 @@ public partial class Game : Node2D
             GetNode<Label>("LivesIndicator").Text = $"Lives: {Math.Max(_lives, 0)}";
             if (_lives <= 0)
             {
-                _enemyTimer.Stop();
                 EmitSignal(SignalName.GameLoss);
             }
 
@@ -51,7 +50,6 @@ public partial class Game : Node2D
         }
     }
 
-    private Timer _enemyTimer;
     private Control _pauseScreen;
 
     public override void _Ready()
@@ -60,14 +58,8 @@ public partial class Game : Node2D
         Matter = _startingMatter;
 
         // enemies
-        _enemyTimer = GetNode<Timer>("EnemyTimer");
         EnemyPath = GetNode<Path2D>("EnemyPath");
-        _enemyTimer.Timeout += () =>
-        {
-            Enemy trashEnemy = _trashEnemy.Instantiate() as Enemy;
-            EnemyPath.AddChild(trashEnemy);
-        };
-        _enemyTimer.Start();
+
 
         // pause screen
         _pauseScreen = GetNode<Control>("PauseScreen");
