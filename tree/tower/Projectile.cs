@@ -9,16 +9,19 @@ public partial class Projectile : Area2D
     private float _aoeRadius;
     private float _velocity;
 
+    private bool _hitEnemy;
+
     public override void _Ready()
     {
         AreaEntered += (other) =>
         {
             var otherParent = other.GetParent();
-            if (otherParent is Enemy enemy)
+            if (otherParent is Enemy enemy && !_hitEnemy )
             {
                 if (_aoeRadius == 0)
                 {
                     enemy.Health -= _damage;
+                    _hitEnemy = true;
                 }
                 else
                 {
@@ -30,6 +33,8 @@ public partial class Projectile : Area2D
                             aoeEnemy.Health -= _damage;
                         }
                     }
+
+                    _hitEnemy = true;
                 }
 
                 QueueFree();
