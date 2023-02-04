@@ -7,6 +7,7 @@ namespace roottowerdefense.tree;
 public partial class TreeLeaf : Node2D
 {
     [Export] public PackedScene AcornShooter;
+    [Export] public PackedScene Cactus;
 
     private RadiusIndicator _radiusIndicator;
 
@@ -31,6 +32,9 @@ public partial class TreeLeaf : Node2D
 
         var btnAcornShooter = _buttons.GetNode<PurchaseButton>("BtnAcornShooter");
         btnAcornShooter.OnPurchased += (int cost) => { BecomeTower(AcornShooter, cost); };
+
+        var btnCactus = _buttons.GetNode<PurchaseButton>("BtnCactus");
+        btnCactus.OnPurchased += (int cost) => { BecomeTower(Cactus, cost); };
 
         // sets up radius indicator
         _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");
