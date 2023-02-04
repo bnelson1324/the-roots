@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.Mime;
 using Godot;
 using roottowerdefense.tree.ui;
 
@@ -9,18 +10,19 @@ public partial class TreeRoot : Node2D
     [Export] public int MaxLeafRadius = 150;
     [Export] public PackedScene LeafScene;
     [Export] public PackedScene BranchScene;
-    
+
     private RadiusIndicator _radiusIndicator;
+    private Control _buttons;
 
     public override void _Ready()
     {
         // set up button signals
-        var buttons = GetNode<Control>("Buttons");
+        _buttons = GetNode<Control>("Buttons");
 
         var btnRoot = GetNode<TextureButton>("BtnRoot");
-        btnRoot.Pressed += () => { buttons.Visible = !buttons.Visible; };
+        btnRoot.Pressed += () => { _buttons.Visible = !_buttons.Visible; };
 
-        var btnNewBranch = buttons.GetNode<PurchaseButton>("BtnNewBranch");
+        var btnNewBranch = _buttons.GetNode<PurchaseButton>("BtnNewBranch");
         btnNewBranch.OnPurchased += CreateBranch;
 
         // sets up radius indicator
@@ -68,6 +70,7 @@ public partial class TreeRoot : Node2D
                 {
                     _radiusIndicator.ShowRadius = false;
                     Game.Instance.Matter -= cost;
+                    _buttons.Visible = false;
                     break;
                 }
             }
