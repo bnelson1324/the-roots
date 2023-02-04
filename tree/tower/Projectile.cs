@@ -16,12 +16,25 @@ public partial class Projectile : Area2D
             var otherParent = other.GetParent();
             if (otherParent is Enemy enemy)
             {
-                enemy.Health -= _damage;
-                // todo: implement damaging all enemies in aoeRadius if aoeRadius != 0
+                if (_aoeRadius == 0)
+                {
+                    enemy.Health -= _damage;
+                }
+                else
+                {
+                    foreach (var enemyNode in Game.Instance.EnemyPath.GetChildren())
+                    {
+                        var aoeEnemy = enemyNode as Enemy;
+                        if (GlobalPosition.DistanceTo(aoeEnemy!.GlobalPosition) < _aoeRadius)
+                        {
+                            aoeEnemy.Health -= _damage;
+                        }
+                    }
+                }
+
                 QueueFree();
             }
         };
-
     }
 
     public override void _Process(double delta)
