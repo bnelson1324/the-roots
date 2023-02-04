@@ -5,6 +5,7 @@ namespace roottowerdefense.enemy;
 public partial class Enemy : PathFollow2D
 {
     [Export] private int _health = 100;
+    [Export] private int _money = 20;
 
     private ProgressBar _healthBar;
 
@@ -17,6 +18,7 @@ public partial class Enemy : PathFollow2D
             _healthBar.Value = _health;
             if (Health <= 0)
             {
+                Game.Instance.Matter += _money;
                 QueueFree();
             }
         }
