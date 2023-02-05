@@ -18,6 +18,7 @@ public partial class Game : Node2D
     [Export] private int _startingMatter; // player's currency
 
     public Path2D EnemyPath;
+    private Node _sfxManager;
 
     private int _matter;
 
@@ -40,7 +41,7 @@ public partial class Game : Node2D
         {
             _lives = value;
             GetNode<Label>("LivesIndicator").Text = $"Lives: {Math.Max(_lives, 0)}";
-            if (_lives <= 0)
+            if (_lives == 0)
             {
                 EmitSignal(SignalName.GameLoss);
                 GetNode<Label>("LoseText").Visible = true;
@@ -63,8 +64,10 @@ public partial class Game : Node2D
         // pause screen
         _pauseScreen = GetNode<Control>("PauseScreen");
         _pauseScreen.GetNode<Button>("BtnRestart").Pressed += () => { GetTree().ReloadCurrentScene(); };
+        _pauseScreen.GetNode<Button>("BtnExit").Pressed += () => { GetTree().Quit(); };
         
         // misc
+        _sfxManager = GetNode("SfxManager");
         Instance = this;
     }
 
@@ -74,5 +77,10 @@ public partial class Game : Node2D
         {
             _pauseScreen.Visible = !_pauseScreen.Visible;
         }
+    }
+
+    public AudioStreamPlayer2D GetAudioPlayer(string name)
+    {
+        return _sfxManager.GetNode<AudioStreamPlayer2D>(name);
     }
 }

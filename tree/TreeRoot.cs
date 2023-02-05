@@ -97,6 +97,10 @@ public partial class TreeRoot : Node2D
                         tower.ApplyUpgrades(_allUpgradeEffects.ToArray());
                         leaf.UpdateRangeIndicator(tower.Range);
                     };
+                    
+                    // sfx
+                    Game.Instance.GetAudioPlayer("Purchase").Play();
+                    
                     break;
                 }
             }

@@ -10,10 +10,12 @@ public partial class UpgradeButton : PurchaseButton
     [Export] private Texture2D _upgradeRangeTexture;
     [Export] private Texture2D _upgradeAoeTexture;
 
-    public UpgradeEffect Effect
+    public UpgradeEffect Effect { get; private set; }
+
+    public override void _Ready()
     {
-        get;
-        private set;
+        base._Ready();
+        OnPurchased += (cost) => { Game.Instance.GetAudioPlayer("Purchase").Play(); };
     }
 
     public void BecomeUpgrade(Upgrade upgrade)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=14 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
@@ -8,6 +8,10 @@
 [ext_resource type="Script" path="res://enemy/WaveManager.cs" id="6_g0j1l"]
 [ext_resource type="PackedScene" uid="uid://ceu7h2kdhxx2u" path="res://enemy/soda-enemy.tscn" id="7_khu64"]
 [ext_resource type="AudioStream" uid="uid://767o5hxlnlnc" path="res://the-roots.ogg" id="8_8c5kv"]
+[ext_resource type="AudioStream" uid="uid://t77wbcfadolu" path="res://sfx/enemy-death.ogg" id="9_sbtbs"]
+[ext_resource type="AudioStream" uid="uid://bsp373osdgkli" path="res://sfx/tower-shoot.ogg" id="10_jlvxn"]
+[ext_resource type="AudioStream" uid="uid://dfv1o03esnyqh" path="res://sfx/purchase.ogg" id="11_d1haj"]
+[ext_resource type="AudioStream" uid="uid://blqtvbe6bo32u" path="res://sfx/life-loss.ogg" id="12_na3th"]
 
 [sub_resource type="Curve2D" id="Curve2D_bqb2c"]
 _data = {
@@ -66,10 +70,17 @@ offset_bottom = 40.0
 [node name="BtnRestart" type="Button" parent="PauseScreen"]
 layout_mode = 0
 offset_left = 524.0
-offset_top = 29.0
-offset_right = 589.0
-offset_bottom = 60.0
+offset_top = 30.0
+offset_right = 638.0
+offset_bottom = 61.0
 text = "Restart Game"
+
+[node name="BtnExit" type="Button" parent="PauseScreen"]
+offset_left = 900.0
+offset_top = 30.0
+offset_right = 1014.0
+offset_bottom = 61.0
+text = "Exit Game"
 
 [node name="Trees" type="Node" parent="."]
 
@@ -128,4 +139,24 @@ text = "You Lose..."
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_8c5kv")
+volume_db = -5.0
 autoplay = true
+
+[node name="SfxManager" type="Node" parent="."]
+
+[node name="EnemyDeath" type="AudioStreamPlayer2D" parent="SfxManager"]
+stream = ExtResource("9_sbtbs")
+max_polyphony = 8
+
+[node name="TowerShoot" type="AudioStreamPlayer2D" parent="SfxManager"]
+stream = ExtResource("10_jlvxn")
+volume_db = 5.0
+max_polyphony = 8
+
+[node name="Purchase" type="AudioStreamPlayer2D" parent="SfxManager"]
+stream = ExtResource("11_d1haj")
+max_polyphony = 3
+
+[node name="LifeLoss" type="AudioStreamPlayer2D" parent="SfxManager"]
+stream = ExtResource("12_na3th")
+max_polyphony = 3

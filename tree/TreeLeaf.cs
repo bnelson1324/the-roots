@@ -66,6 +66,9 @@ public partial class TreeLeaf : Node2D
         // set up range indicator for tower
         UpdateRangeIndicator(tower!.Range);
         _btnLeaf.Pressed += () => { _radiusIndicator.ShowRadius = !_radiusIndicator.ShowRadius; };
+        
+        // sfx
+        Game.Instance.GetAudioPlayer("Purchase").Play();
     }
 
     public void UpdateRangeIndicator(float range)

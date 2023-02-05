@@ -29,6 +29,7 @@ public partial class Tower : Node2D
         _attackTimer = GetNode<Timer>("AttackTimer");
         _attackTimer.WaitTime = AttackDelay;
         _attackTimer.Timeout += () => { _canAttack = true; };
+        _canAttack = true;
     }
 
     public override void _Process(double delta)
@@ -73,6 +74,9 @@ public partial class Tower : Node2D
             projectile.Launch(ProjectileDamage, ProjectileVelocity, ProjectileAoeRadius);
 
             _attackTimer.Start();
+            
+            // sfx
+            Game.Instance.GetAudioPlayer("TowerShoot").Play();
         }
         else
         {

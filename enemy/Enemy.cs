@@ -19,6 +19,7 @@ public partial class Enemy : PathFollow2D
             if (Health <= 0)
             {
                 Game.Instance.Matter += _money;
+                Game.Instance.GetAudioPlayer("EnemyDeath").Play();
                 QueueFree();
             }
         }
@@ -41,6 +42,7 @@ public partial class Enemy : PathFollow2D
         if (GlobalPosition.Y < 0)
         {
             Game.Instance.Lives--;
+            Game.Instance.GetAudioPlayer("LifeLoss").Play();
             QueueFree();
         }
     }
