@@ -11,7 +11,7 @@ ProjectileDamage = 60
 AttackDelay = 3.0
 Range = 400
 ProjectileVelocity = 150
-ProjectileAoeRadius = 200.0
+ProjectileAoeRadius = 60.0
 
 [node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

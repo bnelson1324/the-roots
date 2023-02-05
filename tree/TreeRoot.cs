@@ -105,8 +105,10 @@ public partial class TreeRoot : Node2D
             if (Input.IsMouseButtonPressed(MouseButton.Right))
             {
                 _radiusIndicator.ShowRadius = false;
-                branch.QueueFree();
-                leaf.QueueFree();
+                if(IsInstanceValid(branch))
+                    branch.QueueFree();
+                if(IsInstanceValid(leaf))
+                    leaf.QueueFree();
             }
 
             // wait for next frame

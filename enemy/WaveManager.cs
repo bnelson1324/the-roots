@@ -68,11 +68,18 @@ public partial class WaveManager : Node
                 new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2)
             ),
             
-            // 10-15
+            // 11-15
             new Wave( new WavePack(_sodaEnemy, 8)),
             new WaveLambda(() => { _timeBetweenEnemies = 0.1f; }),
             new Wave(new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 6)),
             new Wave(new WavePack(_sodaEnemy, 8)),
+            new Wave(new WavePack(_sodaEnemy, 16)),
+            new WaveLambda(() => { _timeBetweenEnemies = 0.05f; }),
+            new Wave(new WavePack(_sodaEnemy, 14)),
+            
+            // 16-20
+            new Wave(new WavePack(_sodaEnemy, 33)),
+            
         };
 
         // calc totalWaves
