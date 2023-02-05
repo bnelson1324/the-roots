@@ -62,7 +62,7 @@ offset_bottom = -8.0
 tooltip_text = "Cactus"
 texture_normal = ExtResource("6_k3kg0")
 script = ExtResource("3_spqxy")
-Cost = 200
+Cost = 300
 
 [node name="BtnMushroomMortar" type="TextureButton" parent="Buttons"]
 layout_direction = 1
@@ -75,7 +75,7 @@ offset_bottom = 2.0
 tooltip_text = "Mushroom Mortar"
 texture_normal = ExtResource("8_a3o2l")
 script = ExtResource("3_spqxy")
-Cost = 300
+Cost = 500
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -59,12 +59,11 @@ public partial class Game : Node2D
 
         // enemies
         EnemyPath = GetNode<Path2D>("EnemyPath");
-
-
+        
         // pause screen
         _pauseScreen = GetNode<Control>("PauseScreen");
         _pauseScreen.GetNode<Button>("BtnRestart").Pressed += () => { GetTree().ReloadCurrentScene(); };
-
+        
         // misc
         Instance = this;
     }

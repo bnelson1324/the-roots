@@ -41,7 +41,6 @@ public partial class Enemy : PathFollow2D
         if (GlobalPosition.Y < 0)
         {
             Game.Instance.Lives--;
-            GD.Print("end reached");
             QueueFree();
         }
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=10 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bdacffm63ucbf" path="res://tree/tree-root.tscn" id="3_h4ni3"]
 [ext_resource type="Script" path="res://enemy/WaveManager.cs" id="6_g0j1l"]
 [ext_resource type="PackedScene" uid="uid://ceu7h2kdhxx2u" path="res://enemy/soda-enemy.tscn" id="7_khu64"]
+[ext_resource type="AudioStream" uid="uid://767o5hxlnlnc" path="res://the-roots.ogg" id="8_8c5kv"]
 
 [sub_resource type="Curve2D" id="Curve2D_bqb2c"]
 _data = {
@@ -124,3 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "You Lose..."
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_8c5kv")
+autoplay = true
