@@ -9,7 +9,7 @@
 script = ExtResource("1_gr7qr")
 _projectile = ExtResource("2_hnewa")
 ProjectileDamage = 30
-AttackDelay = 0.8
+AttackDelay = 1.0
 Range = 400
 ProjectileVelocity = 300
 

@@ -11,6 +11,7 @@ public partial class TreeRoot : Node2D
 {
     [Export] public int MaxLeafRadius = 150;
     [Export] private int _perBranchPriceIncrease = 80;
+    [Export] private int _perUpgradePriceIncrease = 150;
     [Export] public PackedScene LeafScene;
     [Export] public PackedScene BranchScene;
 
@@ -128,6 +129,9 @@ public partial class TreeRoot : Node2D
 
         _allUpgradeEffects.Add(effect);
         RandomizeUpgrades();
+
+        _btnUpgrade1.Cost += _perUpgradePriceIncrease;
+        _btnUpgrade2.Cost += _perUpgradePriceIncrease;
     }
 
     private void RandomizeUpgrades()

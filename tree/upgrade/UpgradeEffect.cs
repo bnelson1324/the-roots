@@ -35,10 +35,10 @@ public record UpgradeEffect(string Name, UpgradeEffect.UpgradeLambda Lambda)
     public delegate void UpgradeLambda(Tower tower);
 
     public static readonly UpgradeEffect UpgradeDamage =
-        new UpgradeEffect("Upgrade damage", (tower) => { tower.ProjectileDamage += 30; });
+        new UpgradeEffect("Upgrade damage", (tower) => { tower.ProjectileDamage += 20; });
 
     public static readonly UpgradeEffect UpgradeFireRate =
-        new UpgradeEffect("Upgrade firerate", (tower) => { tower.AttackDelay *= 0.6f; });
+        new UpgradeEffect("Upgrade firerate", (tower) => { tower.AttackDelay *= 0.8f; });
 
     public static readonly UpgradeEffect UpgradeRange =
         new UpgradeEffect("Upgrade range", (tower) => { tower.Range += 100; });
