@@ -18,9 +18,7 @@ public partial class Tower : Node2D
     private Node2D _projectileOrigin;
 
     private bool _canAttack;
-
-    private List<Enemy> _enemiesInRange = new();
-
+    
     public override void _Ready()
     {
         _projectileOrigin = GetNode<Node2D>("ProjectileOrigin");
@@ -29,6 +27,7 @@ public partial class Tower : Node2D
         _attackTimer = GetNode<Timer>("AttackTimer");
         _attackTimer.WaitTime = AttackDelay;
         _attackTimer.Timeout += () => { _canAttack = true; };
+        _attackTimer.Start();
         _canAttack = true;
     }
 
@@ -72,16 +71,11 @@ public partial class Tower : Node2D
             Projectile projectile = (Projectile)_projectile.Instantiate();
             _projectileOrigin.AddChild(projectile);
             projectile.Launch(ProjectileDamage, ProjectileVelocity, ProjectileAoeRadius);
-
-            _attackTimer.Start();
             
             // sfx
             Game.Instance.GetAudioPlayer("TowerShoot").Play();
         }
-        else
-        {
-            _attackTimer.Start(0.1f);
-        }
+        _attackTimer.Start();
     }
 
     public void ApplyUpgrades(params UpgradeEffect[] upgrades)

@@ -34,7 +34,7 @@ public partial class WaveManager : Node
         _enemyPath = GetNode<Path2D>("../EnemyPath");
         _enemyTimer.Timeout += NextWaveEvent;
         GetParent<Game>().GameLoss += () => { _enemyTimer.Stop(); };
-        GetNode<TutorialScreen>("../TutorialScreen").BtnStart.Pressed += () => { _enemyTimer.Start(1); };
+        GetNode<TutorialScreen>("../TutorialScreen").BtnStart.Pressed += () => { _enemyTimer.Start(); };
 
         // DEFINE WAVESLIST
         _wavesList = new WaveEvent[]
@@ -163,7 +163,7 @@ public partial class WaveManager : Node
         {
             _waveIndex++;
             currentLambda.Lambda.Invoke();
-            _enemyTimer.Start(0.1f);
+            _enemyTimer.Start();
         }
     }
 

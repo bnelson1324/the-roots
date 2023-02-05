@@ -175,6 +175,7 @@ text = "Click       to purchase branches/upgrades,
 or click       to purchase towers."
 
 [node name="BtnStart" type="Button" parent="TutorialScreen"]
+layout_mode = 0
 offset_left = 487.0
 offset_top = 599.0
 offset_right = 601.0
