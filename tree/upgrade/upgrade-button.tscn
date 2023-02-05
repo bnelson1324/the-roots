@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxdji8mkr38y4"]
+[gd_scene load_steps=7 format=3 uid="uid://cxdji8mkr38y4"]
 
 [ext_resource type="Texture2D" uid="uid://b2b60botx1uxr" path="res://tree/ui/btn-base.png" id="1_1y33f"]
 [ext_resource type="Script" path="res://tree/upgrade/UpgradeButton.cs" id="1_v3v86"]
+[ext_resource type="Texture2D" uid="uid://dy02lmgvl61ji" path="res://tree/upgrade/btn-upgrade-damage.png" id="3_8nuc8"]
+[ext_resource type="Texture2D" uid="uid://ylj2l7j67ymt" path="res://tree/upgrade/btn-upgrade-fire-rate.png" id="4_vuqnh"]
+[ext_resource type="Texture2D" uid="uid://c0c3fc6wygh7q" path="res://tree/upgrade/btn-upgrade-range.png" id="5_vgn8i"]
+[ext_resource type="Texture2D" uid="uid://dyrhrq33g775m" path="res://tree/upgrade/btn-upgrade-aoe.png" id="6_oftc0"]
 
 [node name="UpgradeButton" type="TextureButton"]
 offset_right = 12.0
 offset_bottom = 12.0
 texture_normal = ExtResource("1_1y33f")
 script = ExtResource("1_v3v86")
-_upgradeDamageTexture = ExtResource("1_1y33f")
-_upgradeFireRateTexture = ExtResource("1_1y33f")
-_upgradeRangeTexture = ExtResource("1_1y33f")
-_upgradeAoeTexture = ExtResource("1_1y33f")
+_upgradeDamageTexture = ExtResource("3_8nuc8")
+_upgradeFireRateTexture = ExtResource("4_vuqnh")
+_upgradeRangeTexture = ExtResource("5_vgn8i")
+_upgradeAoeTexture = ExtResource("6_oftc0")
 Cost = 300

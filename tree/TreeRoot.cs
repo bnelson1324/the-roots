@@ -93,8 +93,7 @@ public partial class TreeRoot : Node2D
                     _btnNewBranch.Cost += _perBranchPriceIncrease;
                     leaf.TowerPurchased += (tower) =>
                     {
-                        GD.Print("new tower upgrade");
-                        tower.ApplyUpgrades(_allUpgradeEffects);
+                        tower.ApplyUpgrades(_allUpgradeEffects.ToArray());
                         leaf.UpdateRangeIndicator(tower.Range);
                     };
                     break;
@@ -123,7 +122,7 @@ public partial class TreeRoot : Node2D
         {
             TreeLeaf leaf = leafNode as TreeLeaf;
             Tower tower = leaf!.GetNode("Tower") as Tower;
-            effect.Lambda(tower);
+            tower!.ApplyUpgrades(effect);
             leaf.UpdateRangeIndicator(tower!.Range);
         }
 

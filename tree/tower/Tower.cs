@@ -80,12 +80,14 @@ public partial class Tower : Node2D
         }
     }
 
-    public void ApplyUpgrades(List<UpgradeEffect> upgrades)
+    public void ApplyUpgrades(params UpgradeEffect[] upgrades)
     {
         // add all current upgrades to node
-        foreach (var effect in upgrades)
+        foreach (var upgradeEffect in upgrades)
         {
-            effect.Lambda(this);
+            upgradeEffect.Lambda(this);
         }
+
+        _attackTimer.WaitTime = AttackDelay;
     }
 }
