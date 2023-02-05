@@ -80,7 +80,7 @@ public partial class Tower : Node2D
         }
         else
         {
-            _attackTimer.Start(0);
+            _attackTimer.Start(0.1f);
         }
     }
 

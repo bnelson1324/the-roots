@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=18 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
@@ -13,6 +13,9 @@
 [ext_resource type="AudioStream" uid="uid://bsp373osdgkli" path="res://sfx/tower-shoot.ogg" id="10_jlvxn"]
 [ext_resource type="AudioStream" uid="uid://dfv1o03esnyqh" path="res://sfx/purchase.ogg" id="11_d1haj"]
 [ext_resource type="AudioStream" uid="uid://blqtvbe6bo32u" path="res://sfx/life-loss.ogg" id="12_na3th"]
+[ext_resource type="Script" path="res://TutorialScreen.cs" id="14_frf5o"]
+[ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="15_trylc"]
+[ext_resource type="Texture2D" uid="uid://dmcok88hgq1cs" path="res://tree/circle-leaf.png" id="16_7ymc8"]
 
 [sub_resource type="Curve2D" id="Curve2D_bqb2c"]
 _data = {
@@ -87,7 +90,7 @@ text = "Exit Game"
 [node name="Trees" type="Node" parent="."]
 
 [node name="TreeRoot" parent="Trees" instance=ExtResource("3_h4ni3")]
-position = Vector2(238, 344)
+position = Vector2(328, 333)
 
 [node name="TreeRoot2" parent="Trees" instance=ExtResource("3_h4ni3")]
 position = Vector2(478, 272)
@@ -97,16 +100,6 @@ position = Vector2(945, 453)
 
 [node name="EnemyPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_bqb2c")
-
-[node name="WaveManager" type="Node" parent="."]
-script = ExtResource("6_g0j1l")
-_trashEnemy = ExtResource("2_7228y")
-_sodaEnemy = ExtResource("7_khu64")
-_bottleEnemy = ExtResource("8_kpwrm")
-
-[node name="EnemyTimer" type="Timer" parent="WaveManager"]
-wait_time = 8.0
-one_shot = true
 
 [node name="WinText" type="Label" parent="."]
 visible = false
@@ -163,3 +156,48 @@ max_polyphony = 3
 [node name="LifeLoss" type="AudioStreamPlayer2D" parent="SfxManager"]
 stream = ExtResource("12_na3th")
 max_polyphony = 3
+
+[node name="TutorialScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_frf5o")
+
+[node name="Text" type="Label" parent="TutorialScreen"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 90.0
+offset_right = 830.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 24
+text = "Click       to purchase branches/upgrades, 
+or click       to purchase towers."
+
+[node name="BtnStart" type="Button" parent="TutorialScreen"]
+offset_left = 487.0
+offset_top = 599.0
+offset_right = 601.0
+offset_bottom = 630.0
+text = "Start Game
+"
+
+[node name="SprRoot" type="Sprite2D" parent="TutorialScreen"]
+position = Vector2(406, 108)
+scale = Vector2(2, 2)
+texture = ExtResource("15_trylc")
+
+[node name="SprLeaf" type="Sprite2D" parent="TutorialScreen"]
+position = Vector2(433, 144)
+scale = Vector2(2, 2)
+texture = ExtResource("16_7ymc8")
+
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("6_g0j1l")
+_trashEnemy = ExtResource("2_7228y")
+_sodaEnemy = ExtResource("7_khu64")
+_bottleEnemy = ExtResource("8_kpwrm")
+
+[node name="EnemyTimer" type="Timer" parent="WaveManager"]
+wait_time = 8.0
+one_shot = true

@@ -22,7 +22,7 @@ public partial class WaveManager : Node
     // difficulty
     private float _timeBetweenEnemies = 4;
     private float _timeBetweenWaves = 5;
-    
+
     // wave indicator
     private int _currentWaveIndicatorNum = 1;
     private int _totalWaves;
@@ -34,7 +34,7 @@ public partial class WaveManager : Node
         _enemyPath = GetNode<Path2D>("../EnemyPath");
         _enemyTimer.Timeout += NextWaveEvent;
         GetParent<Game>().GameLoss += () => { _enemyTimer.Stop(); };
-        _enemyTimer.Start();
+        GetNode<TutorialScreen>("../TutorialScreen").BtnStart.Pressed += () => { _enemyTimer.Start(1); };
 
         // DEFINE WAVESLIST
         _wavesList = new WaveEvent[]
@@ -68,16 +68,16 @@ public partial class WaveManager : Node
                 new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2),
                 new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 2)
             ),
-            
+
             // 11-15
-            new Wave( new WavePack(_sodaEnemy, 8)),
+            new Wave(new WavePack(_sodaEnemy, 8)),
             new WaveLambda(() => { _timeBetweenEnemies = 0.1f; }),
             new Wave(new WavePack(_trashEnemy, 2), new WavePack(_sodaEnemy, 6)),
             new Wave(new WavePack(_sodaEnemy, 8)),
             new Wave(new WavePack(_sodaEnemy, 16)),
             new WaveLambda(() => { _timeBetweenEnemies = 0.05f; }),
             new Wave(new WavePack(_sodaEnemy, 14), new WavePack(_bottleEnemy, 1)),
-            
+
             // 16-20
             new Wave(new WavePack(_sodaEnemy, 33)),
             new WaveLambda(() => { _timeBetweenEnemies = 0.4f; }),
@@ -85,7 +85,7 @@ public partial class WaveManager : Node
             new Wave(new WavePack(_bottleEnemy, 5)),
             new Wave(new WavePack(_sodaEnemy, 5), new WavePack(_bottleEnemy, 16)),
             new Wave(new WavePack(_bottleEnemy, 20)),
-            
+
             // 21-25
             new WaveLambda(() => { _timeBetweenEnemies = 0.05f; }),
             new Wave(new WavePack(_bottleEnemy, 8)),
@@ -163,7 +163,7 @@ public partial class WaveManager : Node
         {
             _waveIndex++;
             currentLambda.Lambda.Invoke();
-            _enemyTimer.Start(0);
+            _enemyTimer.Start(0.1f);
         }
     }
 
