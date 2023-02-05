@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using Godot;
 using roottowerdefense.enemy;
+using roottowerdefense.tree.upgrade;
 
 namespace roottowerdefense.tree.tower;
 
 public partial class Tower : Node2D
 {
     [Export] private PackedScene _projectile;
-    [Export] private int _projectileDamage;
-    [Export] private float _attackDelay = 2;
+    [Export] public int ProjectileDamage;
+    [Export] public float AttackDelay = 2;
     [Export] public int Range;
-    [Export] private int _projectileVelocity;
-    [Export] private float _projectileAoeRadius = 0;
+    [Export] public int ProjectileVelocity;
+    [Export] public float ProjectileAoeRadius = 0;
 
     private Timer _attackTimer;
     private Node2D _projectileOrigin;
@@ -26,7 +27,7 @@ public partial class Tower : Node2D
 
         // set up timer
         _attackTimer = GetNode<Timer>("AttackTimer");
-        _attackTimer.WaitTime = _attackDelay;
+        _attackTimer.WaitTime = AttackDelay;
         _attackTimer.Timeout += () => { _canAttack = true; };
     }
 
@@ -69,13 +70,22 @@ public partial class Tower : Node2D
 
             Projectile projectile = (Projectile)_projectile.Instantiate();
             _projectileOrigin.AddChild(projectile);
-            projectile.Launch(_projectileDamage, _projectileVelocity, _projectileAoeRadius);
+            projectile.Launch(ProjectileDamage, ProjectileVelocity, ProjectileAoeRadius);
 
             _attackTimer.Start();
         }
         else
         {
             _attackTimer.Start(0);
+        }
+    }
+
+    public void ApplyUpgrades(List<UpgradeEffect> upgrades)
+    {
+        // add all current upgrades to node
+        foreach (var effect in upgrades)
+        {
+            effect.Lambda(this);
         }
     }
 }

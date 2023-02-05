@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdacffm63ucbf"]
+[gd_scene load_steps=10 format=3 uid="uid://bdacffm63ucbf"]
 
 [ext_resource type="Texture2D" uid="uid://blos2tfmdf1vs" path="res://tree/circle-root.png" id="1_jj16g"]
 [ext_resource type="Script" path="res://tree/TreeRoot.cs" id="1_le6fw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://tfgvypucl1ac" path="res://tree/branch.tscn" id="3_wqb7k"]
 [ext_resource type="Script" path="res://tree/ui/PurchaseButton.cs" id="5_1lu7s"]
 [ext_resource type="PackedScene" uid="uid://db77gdobhbqgm" path="res://tree/radius-indicator.tscn" id="6_0qytb"]
+[ext_resource type="PackedScene" uid="uid://cxdji8mkr38y4" path="res://tree/upgrade/upgrade-button.tscn" id="7_wkta3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1b656"]
 size = Vector2(16, 16)
@@ -48,9 +49,25 @@ texture_normal = ExtResource("2_g8pna")
 script = ExtResource("5_1lu7s")
 Cost = 100
 
+[node name="BtnUpgrade1" parent="Buttons" instance=ExtResource("7_wkta3")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = -8.0
+
+[node name="BtnUpgrade2" parent="Buttons" instance=ExtResource("7_wkta3")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -10.0
+offset_right = 32.0
+offset_bottom = 2.0
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_1b656")
 
 [node name="RadiusIndicator" parent="." instance=ExtResource("6_0qytb")]
+
+[node name="Leaves" type="Node2D" parent="."]

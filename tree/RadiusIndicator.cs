@@ -4,7 +4,16 @@ namespace roottowerdefense.tree;
 
 public partial class RadiusIndicator : Node2D
 {
-    public float Radius;
+    private float _radius;
+    public float Radius
+    {
+        get => _radius;
+        set
+        {
+            _radius = value;
+            QueueRedraw();
+        }
+    }
 
     private bool _showRadius;
 

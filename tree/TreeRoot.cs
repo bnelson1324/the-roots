@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using Godot;
+using roottowerdefense.tree.tower;
 using roottowerdefense.tree.ui;
+using roottowerdefense.tree.upgrade;
 
 namespace roottowerdefense.tree;
 
@@ -12,12 +14,19 @@ public partial class TreeRoot : Node2D
     [Export] public PackedScene LeafScene;
     [Export] public PackedScene BranchScene;
 
+    private Node2D _leaves;
     private RadiusIndicator _radiusIndicator;
     private Control _buttons;
     private PurchaseButton _btnNewBranch;
 
+    // upgrades
+    private List<UpgradeEffect> _allUpgradeEffects = new();
+    private UpgradeButton _btnUpgrade1, _btnUpgrade2;
+
     public override void _Ready()
     {
+        _leaves = GetNode<Node2D>("Leaves");
+
         // set up button signals
         _buttons = GetNode<Control>("Buttons");
 
@@ -26,6 +35,13 @@ public partial class TreeRoot : Node2D
 
         _btnNewBranch = _buttons.GetNode<PurchaseButton>("BtnNewBranch");
         _btnNewBranch.OnPurchased += CreateBranch;
+
+        // upgrade buttons
+        _btnUpgrade1 = _buttons.GetNode<UpgradeButton>("BtnUpgrade1");
+        _btnUpgrade2 = _buttons.GetNode<UpgradeButton>("BtnUpgrade2");
+        RandomizeUpgrades();
+        _btnUpgrade1.OnPurchased += (cost) => { AddUpgrade(_btnUpgrade1.Effect, cost); };
+        _btnUpgrade2.OnPurchased += (cost) => { AddUpgrade(_btnUpgrade2.Effect, cost); };
 
         // sets up radius indicator
         _radiusIndicator = GetNode<RadiusIndicator>("RadiusIndicator");
@@ -39,7 +55,7 @@ public partial class TreeRoot : Node2D
         // spawn a leaf and a branch
         var leaf = LeafScene.Instantiate<TreeLeaf>();
         var branch = BranchScene.Instantiate<Branch>();
-        AddChild(leaf);
+        _leaves.AddChild(leaf);
         AddChild(branch);
 
         // set up collision detection on the leaf
@@ -75,6 +91,12 @@ public partial class TreeRoot : Node2D
                     _buttons.Visible = false;
                     leaf.IsPlaced = true;
                     _btnNewBranch.Cost += _perBranchPriceIncrease;
+                    leaf.TowerPurchased += (tower) =>
+                    {
+                        GD.Print("new tower upgrade");
+                        tower.ApplyUpgrades(_allUpgradeEffects);
+                        leaf.UpdateRangeIndicator(tower.Range);
+                    };
                     break;
                 }
             }
@@ -90,5 +112,29 @@ public partial class TreeRoot : Node2D
             // wait for next frame
             await ToSignal(GetTree(), "process_frame");
         }
+    }
+
+    // upgrades
+    private void AddUpgrade(UpgradeEffect effect, int cost)
+    {
+        Game.Instance.Matter -= cost;
+
+        foreach (var leafNode in _leaves.GetChildren())
+        {
+            TreeLeaf leaf = leafNode as TreeLeaf;
+            Tower tower = leaf!.GetNode("Tower") as Tower;
+            effect.Lambda(tower);
+            leaf.UpdateRangeIndicator(tower!.Range);
+        }
+
+        _allUpgradeEffects.Add(effect);
+        RandomizeUpgrades();
+    }
+
+    private void RandomizeUpgrades()
+    {
+        var twoUpgrades = UpgradeEffect.GetTwoRandomUpgrades();
+        _btnUpgrade1.BecomeUpgrade(twoUpgrades[0]);
+        _btnUpgrade2.BecomeUpgrade(twoUpgrades[1]);
     }
 }

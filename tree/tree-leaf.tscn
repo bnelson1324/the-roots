@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wmxgic12vho0" path="res://tree/tower/acorn-shooter/acorn-shooter.tscn" id="2_st851"]
 [ext_resource type="PackedScene" uid="uid://dm6k12erci75c" path="res://tree/tower/cactus/cactus.tscn" id="3_mtvf7"]
 [ext_resource type="Script" path="res://tree/ui/PurchaseButton.cs" id="3_spqxy"]
-[ext_resource type="PackedScene" uid="uid://cpvrxar3clbpd" path="res://tree/tower/mushroom-mortar/mushroom-mortar.tscn" id="4_plmbf"]
+[ext_resource type="PackedScene" uid="uid://bjcqeg8iqffjv" path="res://tree/tower/mushroom-mortar/mushroom-mortar.tscn" id="4_plmbf"]
 [ext_resource type="Texture2D" uid="uid://cpdqgsyl508wm" path="res://tree/ui/btn-buy-cactus.png" id="6_k3kg0"]
 [ext_resource type="Texture2D" uid="uid://b8wmtelcjn0ht" path="res://tree/ui/btn-buy-mushroom-mortar.png" id="8_a3o2l"]
 
@@ -83,3 +83,5 @@ Cost = 300
 shape = SubResource("RectangleShape2D_f1qjr")
 
 [node name="RadiusIndicator" parent="." instance=ExtResource("2_5j2yu")]
+
+[node name="Towers" type="Node2D" parent="."]

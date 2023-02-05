@@ -7,11 +7,11 @@
 [node name="MushroomMortar" type="Node2D"]
 script = ExtResource("1_6tnwg")
 _projectile = ExtResource("2_ivwak")
-_projectileDamage = 60
-_attackDelay = 3.0
+ProjectileDamage = 60
+AttackDelay = 3.0
 Range = 400
-_projectileVelocity = 150
-_projectileAoeRadius = 200.0
+ProjectileVelocity = 150
+ProjectileAoeRadius = 200.0
 
 [node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

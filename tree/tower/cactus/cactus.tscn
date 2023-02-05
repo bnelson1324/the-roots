@@ -7,10 +7,10 @@
 [node name="Cactus" type="Node2D"]
 script = ExtResource("1_8s1i0")
 _projectile = ExtResource("2_7rbai")
-_projectileDamage = 80
-_attackDelay = 1.0
+ProjectileDamage = 80
+AttackDelay = 0.8
 Range = 150
-_projectileVelocity = 500
+ProjectileVelocity = 500
 
 [node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

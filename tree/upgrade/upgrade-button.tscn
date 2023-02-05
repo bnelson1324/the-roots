@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxdji8mkr38y4"]
+
+[ext_resource type="Texture2D" uid="uid://b2b60botx1uxr" path="res://tree/ui/btn-base.png" id="1_1y33f"]
+[ext_resource type="Script" path="res://tree/upgrade/UpgradeButton.cs" id="1_v3v86"]
+
+[node name="UpgradeButton" type="TextureButton"]
+offset_right = 12.0
+offset_bottom = 12.0
+texture_normal = ExtResource("1_1y33f")
+script = ExtResource("1_v3v86")
+_upgradeDamageTexture = ExtResource("1_1y33f")
+_upgradeFireRateTexture = ExtResource("1_1y33f")
+_upgradeRangeTexture = ExtResource("1_1y33f")
+_upgradeAoeTexture = ExtResource("1_1y33f")
+Cost = 300

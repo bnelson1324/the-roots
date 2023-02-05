@@ -6,12 +6,15 @@ namespace roottowerdefense.tree;
 
 public partial class TreeLeaf : Node2D
 {
+    [Signal]
+    public delegate void TowerPurchasedEventHandler(Tower tower);
+
     [Export] public PackedScene AcornShooter;
     [Export] public PackedScene Cactus;
     [Export] public PackedScene MushroomMortar;
 
     public bool IsPlaced = false;
-    
+
     private RadiusIndicator _radiusIndicator;
 
     private bool _towerPurchased;
@@ -52,13 +55,21 @@ public partial class TreeLeaf : Node2D
 
         _towerPurchased = true;
         var tower = towerScene.Instantiate() as Tower;
+        tower!.Name = "Tower";
         AddChild(tower);
+
+        EmitSignal(SignalName.TowerPurchased, tower);
 
         // remove all the leaf's buy buttons
         _buttons.QueueFree();
 
         // set up range indicator for tower
-        _radiusIndicator.Radius = tower!.Range;
+        UpdateRangeIndicator(tower!.Range);
         _btnLeaf.Pressed += () => { _radiusIndicator.ShowRadius = !_radiusIndicator.ShowRadius; };
+    }
+
+    public void UpdateRangeIndicator(float range)
+    {
+        _radiusIndicator.Radius = range;
     }
 }
