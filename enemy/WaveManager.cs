@@ -8,6 +8,7 @@ public partial class WaveManager : Node
 {
     [Export] private PackedScene _trashEnemy;
     [Export] private PackedScene _sodaEnemy;
+    [Export] private PackedScene _bottleEnemy;
 
     private Timer _enemyTimer;
     private Path2D _enemyPath;
@@ -75,11 +76,23 @@ public partial class WaveManager : Node
             new Wave(new WavePack(_sodaEnemy, 8)),
             new Wave(new WavePack(_sodaEnemy, 16)),
             new WaveLambda(() => { _timeBetweenEnemies = 0.05f; }),
-            new Wave(new WavePack(_sodaEnemy, 14)),
+            new Wave(new WavePack(_sodaEnemy, 14), new WavePack(_bottleEnemy, 1)),
             
             // 16-20
             new Wave(new WavePack(_sodaEnemy, 33)),
+            new WaveLambda(() => { _timeBetweenEnemies = 0.4f; }),
+            new Wave(new WavePack(_bottleEnemy, 3)),
+            new Wave(new WavePack(_bottleEnemy, 5)),
+            new Wave(new WavePack(_sodaEnemy, 5), new WavePack(_bottleEnemy, 16)),
+            new Wave(new WavePack(_bottleEnemy, 20)),
             
+            // 21-25
+            new WaveLambda(() => { _timeBetweenEnemies = 0.05f; }),
+            new Wave(new WavePack(_bottleEnemy, 8)),
+            new Wave(new WavePack(_bottleEnemy, 16)),
+            new Wave(new WavePack(_bottleEnemy, 20)),
+            new Wave(new WavePack(_bottleEnemy, 30)),
+            new Wave(new WavePack(_bottleEnemy, 100)),
         };
 
         // calc totalWaves

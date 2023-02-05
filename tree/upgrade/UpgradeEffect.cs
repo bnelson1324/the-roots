@@ -41,7 +41,7 @@ public record UpgradeEffect(string Name, UpgradeEffect.UpgradeLambda Lambda)
         new UpgradeEffect("Upgrade firerate", (tower) => { tower.AttackDelay *= 0.8f; });
 
     public static readonly UpgradeEffect UpgradeRange =
-        new UpgradeEffect("Upgrade range", (tower) => { tower.Range += 100; });
+        new UpgradeEffect("Upgrade range", (tower) => { tower.Range += 60; });
 
     public static readonly UpgradeEffect UpgradeAoe =
         new UpgradeEffect("Upgrade area of effect", (tower) => { tower.ProjectileAoeRadius += 25; });

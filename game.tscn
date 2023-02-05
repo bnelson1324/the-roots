@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yqt5rlbrggk"]
+[gd_scene load_steps=15 format=3 uid="uid://yqt5rlbrggk"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_12olu"]
 [ext_resource type="PackedScene" uid="uid://dg866rvtkir4o" path="res://matter-indicator.tscn" id="2_2t3fy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://enemy/WaveManager.cs" id="6_g0j1l"]
 [ext_resource type="PackedScene" uid="uid://ceu7h2kdhxx2u" path="res://enemy/soda-enemy.tscn" id="7_khu64"]
 [ext_resource type="AudioStream" uid="uid://767o5hxlnlnc" path="res://the-roots.ogg" id="8_8c5kv"]
+[ext_resource type="PackedScene" uid="uid://co5uomx1m3pnw" path="res://enemy/bottle-enemy.tscn" id="8_kpwrm"]
 [ext_resource type="AudioStream" uid="uid://t77wbcfadolu" path="res://sfx/enemy-death.ogg" id="9_sbtbs"]
 [ext_resource type="AudioStream" uid="uid://bsp373osdgkli" path="res://sfx/tower-shoot.ogg" id="10_jlvxn"]
 [ext_resource type="AudioStream" uid="uid://dfv1o03esnyqh" path="res://sfx/purchase.ogg" id="11_d1haj"]
@@ -76,6 +77,7 @@ offset_bottom = 61.0
 text = "Restart Game"
 
 [node name="BtnExit" type="Button" parent="PauseScreen"]
+layout_mode = 0
 offset_left = 900.0
 offset_top = 30.0
 offset_right = 1014.0
@@ -100,6 +102,7 @@ curve = SubResource("Curve2D_bqb2c")
 script = ExtResource("6_g0j1l")
 _trashEnemy = ExtResource("2_7228y")
 _sodaEnemy = ExtResource("7_khu64")
+_bottleEnemy = ExtResource("8_kpwrm")
 
 [node name="EnemyTimer" type="Timer" parent="WaveManager"]
 wait_time = 8.0

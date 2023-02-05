@@ -45,6 +45,7 @@ public partial class Game : Node2D
             {
                 EmitSignal(SignalName.GameLoss);
                 GetNode<Label>("LoseText").Visible = true;
+                _pauseScreen.Visible = true;
             }
 
             EmitSignal(SignalName.UiUpdate);
@@ -60,12 +61,12 @@ public partial class Game : Node2D
 
         // enemies
         EnemyPath = GetNode<Path2D>("EnemyPath");
-        
+
         // pause screen
         _pauseScreen = GetNode<Control>("PauseScreen");
         _pauseScreen.GetNode<Button>("BtnRestart").Pressed += () => { GetTree().ReloadCurrentScene(); };
         _pauseScreen.GetNode<Button>("BtnExit").Pressed += () => { GetTree().Quit(); };
-        
+
         // misc
         _sfxManager = GetNode("SfxManager");
         Instance = this;
